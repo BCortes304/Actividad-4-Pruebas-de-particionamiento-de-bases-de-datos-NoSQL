@@ -1,0 +1,83 @@
+
+//Fiabilidad: Inserción de un registro
+
+db.collection.insertOne({
+    "nombre": "Registro de prueba",
+    "descripcion": "Este es un registro de prueba"
+})
+
+
+//Escalabilidad: Inserción Masiva en la Colección de Jurados
+
+db.collection.insertMany([
+    {
+        "nombre": "Jurado 1",
+        "descripcion": "Este es el jurado número 1"
+    },
+    {
+        "nombre": "Jurado 2",
+        "descripcion": "Este es el jurado número 2"
+    },
+    {
+        "nombre": "Jurado 3",
+        "descripcion": "Este es el jurado número 3"
+    }
+])
+
+//Rendimiento: Consultas Individuales y Consultas Masivas
+# Consulta individual
+db.collection.find({
+    "nombre": "Registro de prueba"
+})
+
+# Consulta masiva
+db.collection.find({
+    "nombre": {
+        "$regex": "Jurado"
+    }
+})
+
+//Tiempo de respuesta: Consultas Individuales y Consultas Masivas
+# Consulta individual
+db.collection.find({
+    "nombre": "Registro de prueba"
+}).explain()
+
+# Consulta masiva
+db.collection.find({
+    "nombre": {
+        "$regex": "Jurado"
+    }
+}).explain()
+
+//Tiempo de inserción: Inserción Individuales y Inserciones Masivas
+# Inserción individual
+db.collection.insertOne({
+    "nombre": "Registro de prueba",
+    "descripcion": "Este es un registro de prueba"
+})
+
+# Inserción masiva
+db.collection.insertMany([
+    {
+        "nombre": "Jurado 1",
+        "descripcion": "Este es el jurado número 1"
+    },
+    {
+        "nombre": "Jurado 2",
+        "descripcion": "Este es el jurado número 2"
+    },
+    {
+        "nombre": "Jurado 3",
+        "descripcion": "Este es el jurado número 3"
+    }
+])
+
+//Disponibilidad: Distribución de la Información en los Shards
+# Verificar la distribución de la información en los shards
+db.collection.stats()
+
+# Verificar la distribución de la información en los shards para una colección específica
+db.collection.stats({
+    "shard": true
+})
